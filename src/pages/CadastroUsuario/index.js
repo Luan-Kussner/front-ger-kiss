@@ -6,26 +6,22 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../Config/config";
 
-const Signup = () => {
-  const [email, setEmail] = useState("");
-  const [emailConf, setEmailConf] = useState("");
-  const [senha, setSenha] = useState("");
+const CadastroUsuario = () => {
   const [nome, setNome] = useState("");
   const [dataNascimento, setDataNascimento] = useState("");
   const [cpf, setCpf] = useState("");
+  const [sexo, setSexo] = useState("");
+  const [email, setEmail] = useState("");
+  const [emailConf, setEmailConf] = useState("");
+  const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-
   const handleSignup = async () => {
-    if (!email || !emailConf || !senha || !nome || !dataNascimento || !cpf) {
+    if (!nome || !dataNascimento || !cpf || !sexo) {
       setError("Preencha todos os campos");
       return;
-    } else if (email !== emailConf) {
-      setError("Os e-mails não são iguais");
-      return;
     }
-    
 
     try {
       const headers = {
@@ -37,6 +33,7 @@ const Signup = () => {
         nome,
         dataNascimento,
         cpf,
+        sexo,
         email,
         senha,
         perfil: 1
@@ -56,7 +53,7 @@ const Signup = () => {
 
   return (
     <C.Container>
-      <C.Label>GER KISS</C.Label>
+      <C.Label>Cadastro do Usuário</C.Label>
       <C.Content>
         <C.FormRow>
           <C.FormGroup>
@@ -89,44 +86,23 @@ const Signup = () => {
         </C.FormRow>
         <C.FormRow>
           <C.FormGroup>
-            <label>E-mail</label>
-            <Input
-              type="email"
-              placeholder="Digite seu E-mail"
-              value={email}
-              onChange={(e) => [setEmail(e.target.value), setError("")]}
-            />
-          </C.FormGroup>
-          <C.FormGroup>
-            <label>Confirme seu E-mail</label>
-            <Input
-              type="email"
-              placeholder="Confirme seu E-mail"
-              value={emailConf}
-              onChange={(e) => [setEmailConf(e.target.value), setError("")]}
-            />
-          </C.FormGroup>
-          <C.FormGroup>
-            <label>Senha</label>
-            <Input
-              type="password"
-              placeholder="Digite sua Senha"
-              value={senha}
-              onChange={(e) => [setSenha(e.target.value), setError("")]}
-            />
+            <label>Sexo</label>
+            <select
+              value={sexo}
+              onChange={(e) => [setSexo(e.target.value), setError("")]}
+            >
+              <option value="">Selecione</option>
+              <option value="masculino">Masculino</option>
+              <option value="feminino">Feminino</option>
+              <option value="outro">Outro</option>
+            </select>
           </C.FormGroup>
         </C.FormRow>
         <C.LabelError>{error}</C.LabelError>
-        <Button onClick={handleSignup}>Inscrever-se</Button>
-        <C.LabelSignin>
-          Já tem uma conta?
-          <C.Strong>
-            <Link to="/">&nbsp;Entre</Link>
-          </C.Strong>
-        </C.LabelSignin>
+        <Button onClick={handleSignup}>Salvar</Button>
       </C.Content>
     </C.Container>
   );
 };
 
-export default Signup;
+export default CadastroUsuario;

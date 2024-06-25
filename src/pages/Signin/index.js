@@ -3,12 +3,10 @@ import Input from "../../components/Input";
 import Button from "../../components/Button";
 import * as C from "./styles";
 import { Link, useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import { API_URL } from "../../Config/config";
 
 const Signin = () => {
-  const { signin } = useAuth();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -35,7 +33,7 @@ const Signin = () => {
       const response = await axios.post(API_URL + "usuario/signin", data, { headers }); 
       if (response.status === 200) {
         alert("Usuário Logado com sucesso!");
-        navigate("/home");
+        navigate("/menu-inicial");
       } else {
         setError(response.data.message);
       }
@@ -62,7 +60,7 @@ const Signin = () => {
           onChange={(e) => [setSenha(e.target.value), setError("")]}
         />
         <C.labelError>{error}</C.labelError>
-        <Button Text="Entrar" onClick={handleLogin} />
+        <Button onClick={handleLogin}>Entrar</Button>
         <C.LabelSignup>
           Não tem uma conta?
           <C.Strong>
