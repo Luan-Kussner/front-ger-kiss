@@ -13,7 +13,7 @@ export const Container = styled.div`
     background-color: #00a2e8;
     padding: 20px;
     text-align: center;
-    width: 100%;
+    width: 300%;
 
     h1 {
       margin: 0;

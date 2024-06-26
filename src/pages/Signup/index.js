@@ -5,6 +5,7 @@ import * as C from "./styles";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../Config/config";
+import logo from "../../logo.png";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -56,6 +57,9 @@ const Signup = () => {
 
   return (
     <C.Container>
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" style={{ width: 115, height: 115, marginTop: 10 }} />
+      </header>
       <C.Label>GER KISS</C.Label>
       <C.Content>
         <C.FormRow>

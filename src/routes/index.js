@@ -3,7 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
 import MenuInicial from "../pages/MenuInicial";
-import CadastroUsuario from "../pages/CadastroUsuario";
+import CadastroUsuario from "../pages/Usuarios/CadastroUsuario";
+import ListaUsuarios from "../pages/Usuarios/ListaUsuarios";
 
 const RoutesApp = () => {
   return (
@@ -13,7 +14,8 @@ const RoutesApp = () => {
           <Route path="/" element={<Signin />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/menu-inicial" element={<MenuInicial />} /> 
-          <Route path="/cadastro-usuario" element={<CadastroUsuario />} />
+          <Route path="/cadastro-usuario/:id" element={<CadastroUsuario />} />
+          <Route path="/lista-usuarios" element={<ListaUsuarios />} />
           <Route path="*" element={<Signin />} />
         </Routes>
       </Fragment>
