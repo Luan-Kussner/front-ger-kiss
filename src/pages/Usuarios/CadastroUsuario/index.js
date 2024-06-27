@@ -20,20 +20,23 @@ const CadastroUsuario = () => {
 
   useEffect(() => {
     if (id) {
-      // Se houver ID, busca os dados do usuário para edição
       const fetchUsuario = async () => {
-        try {
-          const response = await axios.get(API_URL + `usuario/${id}`);
-          const { nome, dataNascimento, cpf, sexo, email } = response.data;
-          setNome(nome);
-          setDataNascimento(dataNascimento);
-          setCpf(cpf);
-          setSexo(sexo);
-          setEmail(email);
-        } catch (error) {
-          console.error("Erro ao carregar usuário:", error);
-          setError("Erro ao carregar usuário");
-        }
+          try {
+              const response = await axios.get(API_URL + `usuario/${id}`);
+              const { nome, dataNascimento, cpf, sexo, email } = response.data;
+              console.log(response.data);
+
+              const formattedDate = dataNascimento.split('T')[0];
+
+              setNome(nome);
+              setDataNascimento(formattedDate);
+              setCpf(cpf);
+              setSexo(sexo);
+              setEmail(email);
+          } catch (error) {
+              console.error("Erro ao carregar usuário:", error);
+              setError("Erro ao carregar usuário");
+          }
       };
 
       fetchUsuario();
@@ -41,7 +44,6 @@ const CadastroUsuario = () => {
   }, [id]);
 
   const salvarUsuario = async () => {
-    // Aqui você implementa a lógica para salvar ou atualizar o usuário
     const data = {
       nome,
       dataNascimento,
@@ -53,12 +55,10 @@ const CadastroUsuario = () => {
 
     try {
       if (id) {
-        // Se houver ID, é uma atualização
         console.log(id);
         await axios.put(API_URL + `usuario/${id}`, data);
         alert("Usuário atualizado com sucesso!");
       } else {
-        // Caso contrário, é um novo cadastro
         await axios.post(API_URL + "usuario/signup", data);
         alert("Usuário cadastrado com sucesso!");
       }
